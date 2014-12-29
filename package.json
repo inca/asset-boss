@@ -1,0 +1,29 @@
+{
+  "name": "asset-boss",
+  "version": "1.0.0",
+  "description": "Yet another asset manager",
+  "main": "index.js",
+  "dependencies": {
+    "grunt": "*"
+  },
+  "devDependencies": {
+    "mocha": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/inca/asset-boss"
+  },
+  "keywords": [
+    "asset-management",
+    "production",
+    "development",
+    "static",
+    "grunt"
+  ],
+  "author": "Boris Okunskiy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/inca/asset-boss/issues"
+  },
+  "homepage": "https://github.com/inca/asset-boss"
+}
