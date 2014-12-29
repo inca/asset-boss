@@ -11,7 +11,7 @@ function md5(files) {
   return hash.digest('hex');
 }
 
-function toArray(pattern) {
+function expand(pattern) {
   var arr = Array.isArray(pattern) ? pattern : [pattern];
   return grunt.file.expand({
     filter: 'isFile',
@@ -40,24 +40,25 @@ module.exports = exports = function(options) {
     var group = assets[groupName];
     result[groupName] = {};
     Object.keys(group).forEach(function(fileType) {
-      result[groupName][fileType] = [];
+      var chunk = [];
       var filesHash = group[fileType];
       if ('src' in filesHash || 'dest' in filesHash) {
-        result[groupName][fileType] = debug ? toArray(filesHash.src) : filesHash.dest;
+        chunk = debug ? expand(filesHash.src) : filesHash.dest;
       } else {
         Object.keys(filesHash).forEach(function(targetFile) {
-          var sourceFiles = toArray(filesHash[targetFile]);
+          var sourceFiles = expand(filesHash[targetFile]);
           if (options.debug) {
-            [].push.apply(result[groupName][fileType], toArray(sourceFiles));
+            [].push.apply(chunk, sourceFiles);
           } else {
             var fingerprint = '?' + md5(sourceFiles).substring(0, 8);
-            result[groupName][fileType].push(targetFile + fingerprint);
+            chunk.push(targetFile + fingerprint);
           }
         });
       }
       if (webroot) {
-        result[groupName][fileType] = stripWebroot(result[groupName][fileType], webroot);
+        chunk = stripWebroot(chunk, webroot);
       }
+      result[groupName][fileType] = chunk;
     });
   });
 

@@ -1,0 +1,14 @@
+{
+  "main": {
+    "css": {
+      "public/build/main.css": "public/css/main.css"
+    },
+    "js": {
+      "public/build/main.js": [
+        "public/js/lib/*",
+        "public/js/a.js",
+        "public/js/b.js"
+      ]
+    }
+  }
+}
